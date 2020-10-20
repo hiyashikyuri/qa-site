@@ -11,9 +11,6 @@
     </div>
   <% end %>
 
-
-  <!--user_idに関する部分を削除-->
-
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
@@ -22,6 +19,15 @@
   <div class="field">
     <%= form.label :body %>
     <%= form.text_area :body %>
+  </div>
+
+  <!--ここを追加-->
+  <div class="field">
+    <% @tags.each do |t| %>
+      <%= form.label t.name %>
+      <%= check_box_tag "question[tag_ids][]", t.id, @question.tags.include?(t) %>
+      <br/>
+    <% end %>
   </div>
 
   <div class="actions">

@@ -16,11 +16,13 @@ class QuestionsController < ApplicationController
 
   # GET /questions/new
   def new
+    @tags = Tag.all
     @question = Question.new
   end
 
   # GET /questions/1/edit
   def edit
+    @tags = Tag.all
   end
 
   # POST /questions
@@ -71,6 +73,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:user_id, :title, :body, :best_answer_id)
+      params.require(:question).permit(:user_id, :title, :body, :best_answer_id, {:tag_ids => []})
     end
 end
