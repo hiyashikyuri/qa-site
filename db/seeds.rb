@@ -43,3 +43,13 @@ Reaction.create(
         {body: '東京ばな奈いいですね', user_id: 1, answer_id: 1},
         {body: '猫いいですね！', user_id: 1, answer_id: 4},
         {body: '矢場とんいいですね！', user_id: 3, answer_id: 7}])
+
+
+Tag.create(
+    [
+        {name: '動物'},
+        {name: 'スポーツ'},
+        {name: 'ご飯'},
+        {name: 'その他'}])
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
