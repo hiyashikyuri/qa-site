@@ -1,0 +1,32 @@
+<h1>New Answer</h1>
+
+<!-- 回答する際に質問を表示しておくと分かりやすそうなので配置 -->
+<div>質問情報</div>
+タイトル：<%= @answer.question.title %><br>
+内容：<%= @answer.question.body %><br>
+<%= form_with(model: @answer, url: question_answers_path,local: true) do |form| %>
+  <% if @answer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+      <ul>
+        <% @answer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <!-- ここにもuser_idを入れておかないとparamsに入らない -->
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', answers_path %>

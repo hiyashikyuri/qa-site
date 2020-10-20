@@ -1,0 +1,27 @@
+<h1>New Reaction</h1>
+
+<%= form_with(model: @reaction, url: answer_reactions_path(@reaction.answer.id), local: true) do |form| %>
+  <% if @reaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reaction.errors.count, "error") %> prohibited this reaction from being saved:</h2>
+
+      <ul>
+        <% @reaction.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- ここにもuser_idを入れておかないとparamsに入らない -->
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

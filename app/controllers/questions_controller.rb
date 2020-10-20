@@ -5,7 +5,8 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = current_user.questions.all
+    @questions = current_user.questions.all if current_user.role == '質問者'
+    @questions = Question.all if current_user.role == '回答者'
   end
 
   # GET /questions/1
@@ -70,6 +71,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:user_id, :title, :body)
+      params.require(:question).permit(:user_id, :title, :body, :best_answer_id)
     end
 end

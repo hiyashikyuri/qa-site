@@ -1,11 +1,8 @@
 <div class="container">
   <header class="jumbotron my-4">
-    <h1 class="display-3">質問一覧</h1>
-    <!--質問者のみ質問ができるように修正-->
-    <% if current_user.role == '質問者' %>
-      <%= link_to '質問する！', new_question_path, class: 'btn btn-primary btn-lg' %>
-    <% end %>
+    <h1 class="display-3">Answers</h1>
   </header>
+  <div>現在回答募集中の質問一覧です</div>
   <div class="row text-center">
     <% @questions.each do |question| %>
       <div class="col-lg-3 col-md-6 mb-4">
@@ -16,7 +13,8 @@
             <p class="card-text"><%= question.body %></p>
           </div>
           <div class="card-footer">
-            <%= link_to '詳細', question %>
+            <!-- ここを編集 -->
+            <%= link_to '回答する', new_question_answer_path(question.id) %>
           </div>
         </div>
       </div>
