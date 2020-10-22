@@ -6,6 +6,15 @@
       <%= link_to '質問する！', new_question_path, class: 'btn btn-primary btn-lg' %>
     <% end %>
   </header>
+
+  <!--ここから-->
+  <%= search_form_for @q do |f| %>
+    <%= f.label :title_cont_or_body_cont %>
+    <%= f.search_field :title_or_body_cont %>
+    <%= f.submit %>
+  <% end %>
+  <!--ここまで-->
+
   <div class="row text-center">
     <% @questions.each do |question| %>
       <div class="col-lg-3 col-md-6 mb-4">

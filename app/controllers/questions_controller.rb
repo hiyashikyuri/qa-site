@@ -5,8 +5,9 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = current_user.questions.all if current_user.role == '質問者'
-    @questions = Question.all if current_user.role == '回答者'
+    @q = current_user.questions.ransack(params[:q]) if current_user.role == '質問者'
+    @q = Question.ransack(params[:q]) if current_user.role == '回答者'
+    @questions = @q.result(distinct: true)
   end
 
   # GET /questions/1
